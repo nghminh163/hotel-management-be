@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "title": "Laundry",
+        "description": "This is a service created to meet the personal hygiene and wearing needs of customers.",
+        "price": 10
+    },
+    {
+        "id": 2,
+        "title": "Shuttle",
+        "description": "Shuttle service aims to meet the increasing travel demand and desire to create the most comfortable experience for customers.",
+        "price": 30
+    },
+    {
+        "id": 3,
+        "title": "Spa",
+        "description": "Spa services meet the beauty needs of women, spa services include: sauna, acne peeling, hair washing...",
+        "price": 100
+    },
+    {
+        "id": 4,
+        "title": "Fitness Center",
+        "description": "Multi-purpose gym is always a place of interest to visitors.  When traveling for work or travel, you still can ensure the progress of your workouts.",
+        "price": 30
+    },
+    {
+        "id": 5,
+        "title": "Swimming Pool",
+        "description": "The 4-season swimming pool is always an interesting choice for guests when coming to the hotel with a four-season swimming pool.  Especially in hot weather, the swimming pool attracts the most visitors.",
+        "price": 20
+    }
+]

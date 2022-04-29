@@ -1,0 +1,322 @@
+[
+    {
+        "roomNumber": 200,
+        "typeId": 1
+    },
+    {
+        "roomNumber": 201,
+        "typeId": 1
+    },
+    {
+        "roomNumber": 202,
+        "typeId": 1
+    },
+    {
+        "roomNumber": 203,
+        "typeId": 1
+    },
+    {
+        "roomNumber": 204,
+        "typeId": 2
+    },
+    {
+        "roomNumber": 205,
+        "typeId": 2
+    },
+    {
+        "roomNumber": 206,
+        "typeId": 2
+    },
+    {
+        "roomNumber": 207,
+        "typeId": 2
+    },
+    {
+        "roomNumber": 208,
+        "typeId": 3
+    },
+    {
+        "roomNumber": 209,
+        "typeId": 3
+    },
+    {
+        "roomNumber": 300,
+        "typeId": 1
+    },
+    {
+        "roomNumber": 301,
+        "typeId": 1
+    },
+    {
+        "roomNumber": 302,
+        "typeId": 1
+    },
+    {
+        "roomNumber": 303,
+        "typeId": 1
+    },
+    {
+        "roomNumber": 304,
+        "typeId": 2
+    },
+    {
+        "roomNumber": 305,
+        "typeId": 2
+    },
+    {
+        "roomNumber": 306,
+        "typeId": 2
+    },
+    {
+        "roomNumber": 307,
+        "typeId": 2
+    },
+    {
+        "roomNumber": 308,
+        "typeId": 3
+    },
+    {
+        "roomNumber": 309,
+        "typeId": 3
+    },
+    {
+        "roomNumber": 400,
+        "typeId": 1
+    },
+    {
+        "roomNumber": 401,
+        "typeId": 1
+    },
+    {
+        "roomNumber": 402,
+        "typeId": 1
+    },
+    {
+        "roomNumber": 403,
+        "typeId": 1
+    },
+    {
+        "roomNumber": 404,
+        "typeId": 2
+    },
+    {
+        "roomNumber": 405,
+        "typeId": 2
+    },
+    {
+        "roomNumber": 406,
+        "typeId": 2
+    },
+    {
+        "roomNumber": 407,
+        "typeId": 2
+    },
+    {
+        "roomNumber": 408,
+        "typeId": 3
+    },
+    {
+        "roomNumber": 409,
+        "typeId": 3
+    },
+    {
+        "roomNumber": 500,
+        "typeId": 1
+    },
+    {
+        "roomNumber": 501,
+        "typeId": 1
+    },
+    {
+        "roomNumber": 502,
+        "typeId": 1
+    },
+    {
+        "roomNumber": 503,
+        "typeId": 1
+    },
+    {
+        "roomNumber": 504,
+        "typeId": 2
+    },
+    {
+        "roomNumber": 505,
+        "typeId": 2
+    },
+    {
+        "roomNumber": 506,
+        "typeId": 2
+    },
+    {
+        "roomNumber": 507,
+        "typeId": 2
+    },
+    {
+        "roomNumber": 508,
+        "typeId": 3
+    },
+    {
+        "roomNumber": 509,
+        "typeId": 3
+    },
+    {
+        "roomNumber": 600,
+        "typeId": 1
+    },
+    {
+        "roomNumber": 601,
+        "typeId": 1
+    },
+    {
+        "roomNumber": 602,
+        "typeId": 1
+    },
+    {
+        "roomNumber": 603,
+        "typeId": 1
+    },
+    {
+        "roomNumber": 604,
+        "typeId": 2
+    },
+    {
+        "roomNumber": 605,
+        "typeId": 2
+    },
+    {
+        "roomNumber": 606,
+        "typeId": 2
+    },
+    {
+        "roomNumber": 607,
+        "typeId": 2
+    },
+    {
+        "roomNumber": 608,
+        "typeId": 3
+    },
+    {
+        "roomNumber": 609,
+        "typeId": 3
+    },
+    {
+        "roomNumber": 700,
+        "typeId": 4
+    },
+    {
+        "roomNumber": 701,
+        "typeId": 4
+    },
+    {
+        "roomNumber": 702,
+        "typeId": 4
+    },
+    {
+        "roomNumber": 703,
+        "typeId": 4
+    },
+    {
+        "roomNumber": 704,
+        "typeId": 4
+    },
+    {
+        "roomNumber": 705,
+        "typeId": 5
+    },
+    {
+        "roomNumber": 706,
+        "typeId": 5
+    },
+    {
+        "roomNumber": 707,
+        "typeId": 5
+    },
+    {
+        "roomNumber": 708,
+        "typeId": 5
+    },
+    {
+        "roomNumber": 709,
+        "typeId": 5
+    },
+    {
+        "roomNumber": 800,
+        "typeId": 6
+    },
+    {
+        "roomNumber": 801,
+        "typeId": 6
+    },
+    {
+        "roomNumber": 802,
+        "typeId": 6
+    },
+    {
+        "roomNumber": 803,
+        "typeId": 6
+    },
+    {
+        "roomNumber": 804,
+        "typeId": 6
+    },
+    {
+        "roomNumber": 805,
+        "typeId": 7
+    },
+    {
+        "roomNumber": 806,
+        "typeId": 7
+    },
+    {
+        "roomNumber": 807,
+        "typeId": 7
+    },
+    {
+        "roomNumber": 808,
+        "typeId": 7
+    },
+    {
+        "roomNumber": 809,
+        "typeId": 7
+    },
+    {
+        "roomNumber": 900,
+        "typeId": 8
+    },
+    {
+        "roomNumber": 901,
+        "typeId": 8
+    },
+    {
+        "roomNumber": 902,
+        "typeId": 8
+    },
+    {
+        "roomNumber": 903,
+        "typeId": 8
+    },
+    {
+        "roomNumber": 904,
+        "typeId": 8
+    },
+    {
+        "roomNumber": 905,
+        "typeId": 9
+    },
+    {
+        "roomNumber": 906,
+        "typeId": 9
+    },
+    {
+        "roomNumber": 907,
+        "typeId": 9
+    },
+    {
+        "roomNumber": 908,
+        "typeId": 9
+    },
+    {
+        "roomNumber": 909,
+        "typeId": 9
+    }
+]
