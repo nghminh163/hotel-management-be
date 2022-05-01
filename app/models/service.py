@@ -71,9 +71,10 @@ class ServiceOrders(db.Model):
 
     def toJSON(self):
         return {
-            "id": self.orderId,
             "status": self.status,
-            "booking_id": self.booking_id,
-            "service_id": self.service_id,
+            "orderId": self.orderId,
+            "bookingId": self.booking_id,
+            "serviceId": self.service_id,
             "note": self.note,
+            "createdAt": self.created_at.isoformat()
         }
