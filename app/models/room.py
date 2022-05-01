@@ -28,10 +28,15 @@ class Room(db.Model):
         except NoResultFound:
             return None
 
-    def toJSON(self):
+    def toJSON(self, isDetailed=False):
+        if isDetailed:
+            return {
+                'roomNumber': self.roomNumber,
+                'roomType': self.roomType.toJSON()
+            }
         return {
             'roomNumber': self.roomNumber,
-            'roomType': self.roomType
+            'roomType': self.roomType.id
         }
 
 

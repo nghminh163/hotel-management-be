@@ -32,6 +32,11 @@ def strToTime(strDate, strTime=""):
 def createBooking():
     reqData = request.json
     msg = validatorCreate(reqData)
+    # Check room available
+    bookings = Booking.query.filter(
+        Booking.status.in_([1, 2])).filter_by(roomNumber=reqData['roomNumber']).all()
+    if len(bookings) > 0:
+        return jsonify({"isError": True, "msg": "Room is not available"})
     if msg is True:
         checkInTime = strToTime(reqData['checkInDate'])
         checkOutTime = strToTime(reqData['checkOutDate'])
@@ -67,6 +72,7 @@ def checkInById(booking_id):
     except:
         return jsonify({"isError": True, "msg": "Something went wrong"})
 
+
 @mod.route('/<booking_id>/checkout', methods=["PUT"])
 def checkOutById(booking_id):
     try:
@@ -77,5 +83,14 @@ def checkOutById(booking_id):
             db.session.commit()
             return jsonify({"isError": False, "data": booking.toJSON()})
         return jsonify({"isError": True, "msg": "Booking not found"})
+    except:
+        return jsonify({"isError": True, "msg": "Something went wrong"})
+
+
+@mod.route('/', methods=["GET"])
+def getBookings():
+    try:
+        bookings: Booking = Booking.query.all()
+        return jsonify({"isError": False, "data": list(map(lambda booking: booking.toJSON(), bookings))})
     except:
         return jsonify({"isError": True, "msg": "Something went wrong"})
