@@ -32,10 +32,13 @@ def recreate_db():
 
 @manager.command
 def seed():
-    from generateDb import services, roomTypes,rooms
+    from generateDb import services, roomTypes,rooms,bookings,serviceOrders
     services.generate()
     roomTypes.generate()
     rooms.generate()
+    bookings.generate()
+    serviceOrders.generate()
+
 
 
 @manager.command

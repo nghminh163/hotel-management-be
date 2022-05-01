@@ -12,8 +12,11 @@ class Booking(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     clientName = db.Column(db.String(255), nullable=False)
     clientNumber = db.Column(db.String(255), nullable=False)
-    checkinDate = db.Column(db.DateTime)
-    checkoutDate = db.Column(db.DateTime)
+    checkinDate = db.Column(db.String(30))
+    checkoutDate = db.Column(db.String(30))
+    checkinTime = db.Column(db.String(30))
+    checkoutTime = db.Column(db.String(30))
+
     status = db.Column(db.Integer, default=1)
     roomNumber = db.Column(db.Integer, ForeignKey('Rooms.roomNumber'))
     room = db.relationship("Room")
@@ -21,13 +24,16 @@ class Booking(db.Model):
     created_at = db.Column(db.DateTime, default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
 
-    def __init__(self, clientName, clientNumber, checkinDate, checkoutDate,roomNumber):
+    def __init__(self, clientName, clientNumber, checkinDate, checkoutDate, roomNumber, checkinTime="", checkoutTime="", status=1):
         self.clientName = clientName
         self.clientNumber = clientNumber
         self.checkinDate = checkinDate
         self.checkoutDate = checkoutDate
         self.roomNumber = roomNumber
 
+        self.checkinTime = checkinTime
+        self.checkoutTime = checkoutTime
+        self.status = status
 
     def __repr__(self):
         return '<Booking %s>' % self.id
@@ -44,10 +50,10 @@ class Booking(db.Model):
             'id': self.id,
             'clientName': self.clientName,
             'clientNumber': self.clientNumber,
-            'checkinDate': self.checkinDate.strftime("%Y-%m-%d"),
-            'checkoutDate': self.checkoutDate.strftime("%Y-%m-%d"),
+            'checkinDate': self.checkinDate,
+            'checkoutDate': self.checkoutDate,
             'status': self.status,
             'roomNumber': self.roomNumber,
-            'created_at': self.created_at.strftime("%Y-%m-%d"),
+            'created_at': self.created_at,
             'updated_at': self.updated_at
         }

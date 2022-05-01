@@ -4,7 +4,7 @@ from app.utils.roomType import getRoomsAvailableByRoomType
 from flask import Blueprint, jsonify, request
 from app.models.booking import Booking
 from app import db
-from app.models.room import Room, RoomType
+from app.models.room import RoomType
 mod = Blueprint('bookings', __name__, url_prefix='/bookings')
 
 
@@ -35,8 +35,10 @@ def createBooking():
     reqData = request.json
     msg = validatorCreate(reqData)
     if msg is True:
-        checkInTime = strToTime(reqData['checkInDate'])
-        checkOutTime = strToTime(reqData['checkOutDate'])
+        checkInTime = reqData['checkInDate']
+        checkOutTime = reqData['checkOutDate']
+        # checkInTime = strToTime(reqData['checkInDate'])
+        # checkOutTime = strToTime(reqData['checkOutDate'])
         availableRoomsRes = getRoomsAvailableByRoomType(reqData['roomType'])
         if availableRoomsRes['isError'] is True:
             return jsonify(availableRoomsRes)
@@ -45,7 +47,7 @@ def createBooking():
             if len(availableRooms) > 0:
                 shuffle(availableRooms)
                 booking = Booking(clientName=reqData['clientName'], clientNumber=reqData['clientNumber'],
-                                checkinDate=checkInTime, checkoutDate=checkOutTime, roomNumber=availableRooms[0].roomNumber)
+                                  checkinDate=checkInTime, checkoutDate=checkOutTime, roomNumber=availableRooms[0].roomNumber)
                 db.session.add(booking)
                 db.session.commit()
                 return jsonify({"isError": False, "data": booking.toJSON()})
@@ -72,7 +74,8 @@ def checkInById(booking_id):
         booking: Booking = Booking.query.get(booking_id)
         if booking:
             booking.status = 2
-            booking.checkinDate = datetime.datetime.now()
+            booking.checkinDate = datetime.datetime.now().strftime("%Y-%m-%d")
+            booking.checkinTime = datetime.datetime.now().strftime("%H:%M:%S")
             db.session.commit()
             return jsonify({"isError": False, "data": booking.toJSON()})
         return jsonify({"isError": True, "msg": "Booking not found"})
@@ -86,7 +89,8 @@ def checkOutById(booking_id):
         booking: Booking = Booking.query.get(booking_id)
         if booking:
             booking.status = 3
-            booking.checkoutDate = datetime.datetime.now()
+            booking.checkoutDate = datetime.datetime.now().strftime("%Y-%m-%d")
+            booking.checkoutTime = datetime.datetime.now().strftime("%H:%M:%S")
             db.session.commit()
             return jsonify({"isError": False, "data": booking.toJSON()})
         return jsonify({"isError": True, "msg": "Booking not found"})
