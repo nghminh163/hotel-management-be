@@ -1,3 +1,4 @@
+from datetime import datetime
 from email.policy import default
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm.exc import NoResultFound
@@ -43,10 +44,10 @@ class Booking(db.Model):
             'id': self.id,
             'clientName': self.clientName,
             'clientNumber': self.clientNumber,
-            'checkinDate': self.checkinDate,
-            'checkoutDate': self.checkoutDate,
+            'checkinDate': self.checkinDate.strftime("%Y-%m-%d"),
+            'checkoutDate': self.checkoutDate.strftime("%Y-%m-%d"),
             'status': self.status,
             'roomNumber': self.roomNumber,
-            'created_at': self.created_at,
+            'created_at': self.created_at.strftime("%Y-%m-%d"),
             'updated_at': self.updated_at
         }

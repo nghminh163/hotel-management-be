@@ -75,12 +75,21 @@ class RoomType(db.Model):
         except NoResultFound:
             return None
 
-    def toJSON(self):
+    def toJSON(self, isDetail = False):
+        if isDetail:  
+            return {
+                "id": self.id,
+                "type": self.type,
+                "area": self.area,
+                "description": self.description,
+                "price": self.price,
+                "promo": list(map(lambda x: x.toJSON(), self.promo))
+            }
         return {
             "id": self.id,
             "type": self.type,
             "area": self.area,
             "description": self.description,
             "price": self.price,
-            "promo": list(map(lambda x: x.toJSON(), self.promo))
+            "promo": list(map(lambda x: x.id, self.promo))
         }

@@ -1,8 +1,10 @@
 import datetime
+from random import shuffle
+from app.utils.roomType import getRoomsAvailableByRoomType
 from flask import Blueprint, jsonify, request
 from app.models.booking import Booking
 from app import db
-from app.models.room import Room
+from app.models.room import Room, RoomType
 mod = Blueprint('bookings', __name__, url_prefix='/bookings')
 
 
@@ -15,9 +17,9 @@ def validatorCreate(data):
         return "Missing check in date"
     if 'checkOutDate' not in data:
         return "Missing check out date"
-    if 'roomNumber' not in data:
+    if 'roomType' not in data:
         return "Missing room number"
-    if Room.query.get(data['roomNumber']) is None:
+    if RoomType.query.get(data['roomType']) is None:
         return 'Invalid room'
     # Handle case number phone + checkin date >= today, check out date > checkin date
     return True
@@ -32,19 +34,24 @@ def strToTime(strDate, strTime=""):
 def createBooking():
     reqData = request.json
     msg = validatorCreate(reqData)
-    # Check room available
-    bookings = Booking.query.filter(
-        Booking.status.in_([1, 2])).filter_by(roomNumber=reqData['roomNumber']).all()
-    if len(bookings) > 0:
-        return jsonify({"isError": True, "msg": "Room is not available"})
     if msg is True:
         checkInTime = strToTime(reqData['checkInDate'])
         checkOutTime = strToTime(reqData['checkOutDate'])
-        booking = Booking(clientName=reqData['clientName'], clientNumber=reqData['clientNumber'],
-                          checkinDate=checkInTime, checkoutDate=checkOutTime, roomNumber=reqData['roomNumber'])
-        db.session.add(booking)
-        db.session.commit()
-        return jsonify({"isError": False, "data": booking.toJSON()})
+        availableRoomsRes = getRoomsAvailableByRoomType(reqData['roomType'])
+        if availableRoomsRes['isError'] is True:
+            return jsonify(availableRoomsRes)
+        else:
+            availableRooms = availableRoomsRes['data']
+            if len(availableRooms) > 0:
+                shuffle(availableRooms)
+                booking = Booking(clientName=reqData['clientName'], clientNumber=reqData['clientNumber'],
+                                checkinDate=checkInTime, checkoutDate=checkOutTime, roomNumber=availableRooms[0].roomNumber)
+                db.session.add(booking)
+                db.session.commit()
+                return jsonify({"isError": False, "data": booking.toJSON()})
+            else:
+                return jsonify({"isError": True, "msg": "No room available"})
+
     return jsonify({"isError": True, "msg": msg})
 
 
