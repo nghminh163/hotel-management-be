@@ -15,11 +15,13 @@ def create_app(config_name):
     from app.routes.roomTypes import mod as roomType_mod
     from app.routes.rooms import mod as rooms_mod
     from app.routes.bookings import mod as bookings_mod
+    from app.routes.revenue import mod as revenue_mod
 
     app.register_blueprint(roomType_mod)
     app.register_blueprint(services_mod)
     app.register_blueprint(rooms_mod)
     app.register_blueprint(bookings_mod)
+    app.register_blueprint(revenue_mod)
 
 
     #  # HTTP error handling

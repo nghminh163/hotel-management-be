@@ -1,5 +1,6 @@
 import datetime
 from random import shuffle
+from app.utils.booking import getBookingByDate, getUpcomingArrivals, getUpcomingDeparture
 from app.utils.roomType import getRoomsAvailableByRoomType
 from flask import Blueprint, jsonify, request
 from app.models.booking import Booking
@@ -105,3 +106,34 @@ def getBookings():
         return jsonify({"isError": False, "data": list(map(lambda booking: booking.toJSON(), bookings))})
     except:
         return jsonify({"isError": True, "msg": "Something went wrong"})
+
+@mod.route('/byDate/count', methods=['GET'])
+def getTotalBookingByDate():
+    date = request.args.get(
+        'date', default=datetime.datetime.now().strftime("%Y-%m-%d"))
+    bookings: list[Booking] = getBookingByDate(date, 1)
+    return str(len(bookings))
+
+@mod.route('/checkin/byDate/count', methods=['GET'])
+def getTotalCheckinByDate():
+    date = request.args.get(
+        'date', default=datetime.datetime.now().strftime("%Y-%m-%d"))
+    bookings: list[Booking] = getBookingByDate(date, 2)
+    return str(len(bookings))
+
+@mod.route('/checkout/byDate/count', methods=['GET'])
+def getTotalCheckoutByDate():
+    date = request.args.get(
+        'date', default=datetime.datetime.now().strftime("%Y-%m-%d"))
+    bookings: list[Booking] = getBookingByDate(date, 3)
+    return str(len(bookings))
+
+@mod.route('/upcoming/arrivals', methods=['GET'])
+def getUpcomingArr():
+    bookings: list[Booking] = getUpcomingArrivals()
+    return jsonify(list(map(lambda x:x.toJSON(), bookings)))
+
+@mod.route('/upcoming/departure', methods=['GET'])
+def getUpcomingDep():
+    bookings: list[Booking] = getUpcomingDeparture()
+    return jsonify(list(map(lambda x:x.toJSON(), bookings)))
