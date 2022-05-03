@@ -24,7 +24,7 @@ class Booking(db.Model):
     created_at = db.Column(db.DateTime, default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
 
-    def __init__(self, clientName, clientNumber, checkinDate, checkoutDate, roomNumber, checkinTime="", checkoutTime="", status=1):
+    def __init__(self, clientName, clientNumber, checkinDate, checkoutDate, roomNumber, checkinTime="", checkoutTime="", status=1, created_at=db.func.now()):
         self.clientName = clientName
         self.clientNumber = clientNumber
         self.checkinDate = checkinDate
@@ -34,6 +34,7 @@ class Booking(db.Model):
         self.checkinTime = checkinTime
         self.checkoutTime = checkoutTime
         self.status = status
+        self.created_at = created_at
 
     def __repr__(self):
         return '<Booking %s>' % self.id

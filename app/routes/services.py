@@ -1,5 +1,6 @@
 import datetime
 from flask import Blueprint, jsonify, request
+from app.models.booking import Booking
 from app.models.service import Service, ServiceOrders
 from app import db
 
@@ -34,8 +35,10 @@ def getServiceOrdersByDate():
 @mod.route('/createOrder', methods=['POST'])
 def createServiceOrder():
     reqData = request.json
+    roomNo = reqData['roomNumber']
+    booking:Booking = Booking.query.filter_by(roomNumber=roomNo, status=2).first()
     serviceOrder = ServiceOrders(
-        booking_id=reqData['bookingId'], service_id=reqData['serviceId'], note=reqData['note'], status=1)
+        booking_id=booking.id, service_id=reqData['serviceId'], note=reqData['note'], status=1)
     db.session.add_all(serviceOrder)
     db.session.commit()
 
@@ -64,6 +67,7 @@ def getServiceOrdersByBookingId(booking_id):
 def getTodayOrdersByStatus():
     status = request.args.get(
         'status', type=int, default=1)
-    serviceOrders: list[ServiceOrders] = ServiceOrders.query.filter_by(status=status).all()
+    serviceOrders: list[ServiceOrders] = ServiceOrders.query.filter_by(
+        status=status).all()
     return jsonify(list(map(lambda o: o.toJSON(), serviceOrders)))
 # ,
