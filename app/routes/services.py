@@ -51,3 +51,19 @@ def finishOrderService(order_id):
         return jsonify({"isError": True, "msg": "Booking not found"})
     except:
         return jsonify({"isError": True, "msg": "Something went wrong"})
+
+
+@mod.route('/booking/<booking_id>', methods=['GET'])
+def getServiceOrdersByBookingId(booking_id):
+    serviceOrders: list[ServiceOrders] = ServiceOrders.query.filter_by(
+        booking_id=booking_id).all()
+    return jsonify(list(map(lambda o: o.toJSON(), serviceOrders)))
+
+
+@mod.route('/getToday', methods=['GET'])
+def getTodayOrdersByStatus():
+    status = request.args.get(
+        'status', type=int, default=1)
+    serviceOrders: list[ServiceOrders] = ServiceOrders.query.filter_by(status=status).all()
+    return jsonify(list(map(lambda o: o.toJSON(), serviceOrders)))
+# ,
