@@ -1,0 +1,1 @@
+  rm -rf dev.db && rm -rf migrations && python3 manager.py db init && python3 manager.py db migrate -m "Initial migration." && python3 manager.py db upgrade && python3 manager.py seed && python3 manager.py dev &
