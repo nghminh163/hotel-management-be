@@ -1,6 +1,6 @@
 import datetime
 from random import shuffle
-from app.utils.booking import getBookingByDate, getUpcomingArrivals, getUpcomingDeparture
+from app.utils.booking import getBookingByDate, getUpcomingArrivals, getUpcomingDeparture, getCheckinByDate, getCheckoutByDate
 from app.utils.roomType import getRoomsAvailableByRoomType
 from flask import Blueprint, jsonify, request
 from app.models.booking import Booking
@@ -118,14 +118,14 @@ def getTotalBookingByDate():
 def getTotalCheckinByDate():
     date = request.args.get(
         'date', default=datetime.datetime.now().strftime("%Y-%m-%d"))
-    bookings: list[Booking] = getBookingByDate(date, 2)
+    bookings: list[Booking] = getCheckinByDate(date, 2)
     return str(len(bookings))
 
 @mod.route('/checkout/byDate/count', methods=['GET'])
 def getTotalCheckoutByDate():
     date = request.args.get(
         'date', default=datetime.datetime.now().strftime("%Y-%m-%d"))
-    bookings: list[Booking] = getBookingByDate(date, 3)
+    bookings: list[Booking] = getCheckoutByDate(date, 3)
     return str(len(bookings))
 
 @mod.route('/upcoming/arrivals', methods=['GET'])
