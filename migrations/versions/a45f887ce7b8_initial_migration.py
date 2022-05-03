@@ -1,8 +1,8 @@
 """Initial migration.
 
-Revision ID: 215c32b068de
+Revision ID: a45f887ce7b8
 Revises: 
-Create Date: 2022-05-02 02:45:33.722570
+Create Date: 2022-05-03 22:16:28.991780
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '215c32b068de'
+revision = 'a45f887ce7b8'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -31,6 +31,16 @@ def upgrade():
     sa.Column('title', sa.String(length=255), nullable=False),
     sa.Column('description', sa.String(length=255), nullable=False),
     sa.Column('price', sa.Integer(), nullable=False),
+    sa.Column('created_at', sa.DateTime(), nullable=True),
+    sa.Column('updated_at', sa.DateTime(), nullable=True),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_table('Users',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('username', sa.String(length=255), nullable=False),
+    sa.Column('password', sa.String(length=255), nullable=False),
+    sa.Column('firstName', sa.String(length=255), nullable=False),
+    sa.Column('lastName', sa.String(length=255), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.PrimaryKeyConstraint('id')
@@ -83,6 +93,7 @@ def downgrade():
     op.drop_table('Bookings')
     op.drop_table('Rooms')
     op.drop_table('RoomType_Service')
+    op.drop_table('Users')
     op.drop_table('Services')
     op.drop_table('RoomTypes')
     # ### end Alembic commands ###
