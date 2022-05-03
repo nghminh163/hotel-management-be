@@ -69,5 +69,10 @@ def getTodayOrdersByStatus():
         'status', type=int, default=1)
     serviceOrders: list[ServiceOrders] = ServiceOrders.query.filter_by(
         status=status).all()
-    return jsonify(list(map(lambda o: o.toJSON(), serviceOrders)))
+    results = []
+    for order in serviceOrders:
+        if datetime.datetime.now().strftime("%Y-%m-%d") in order.created_at.strftime("%Y-%m-%d"):
+            results.append(order)
+
+    return jsonify(list(map(lambda o: o.toJSON(), results)))
 # ,
