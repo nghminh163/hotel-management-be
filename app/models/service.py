@@ -81,6 +81,6 @@ class ServiceOrders(db.Model):
             "bookingId": self.booking_id,
             "serviceId": self.service_id,
             "note": self.note,
-            # "createdAt": self.created_at.isoformat(),
-            # "roomNumber": self.booking.roomNumber
+            "createdAt": self.created_at.isoformat(),
+            "roomNumber": self.booking.roomNumber
         }
