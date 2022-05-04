@@ -1,3 +1,4 @@
+from datetime import datetime
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm.exc import NoResultFound
 
@@ -53,12 +54,15 @@ class ServiceOrders(db.Model):
     created_at = db.Column(db.DateTime, default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
 
-    def __init__(self,  booking_id, service_id, note, status=1, created_at=db.func.now()):
+    def __init__(self,  booking_id, service_id, note, status=1, created_at=""):
         self.status = status
         self.booking_id = booking_id
         self.service_id = service_id
         self.note = note
-        self.created_at = created_at
+        if created_at == "":
+            self.created_at = datetime.now()
+        else:
+            self.created_at = created_at
 
     def __repr__(self):
         return '<ServiceOrder %s>' % self.orderId
@@ -77,6 +81,6 @@ class ServiceOrders(db.Model):
             "bookingId": self.booking_id,
             "serviceId": self.service_id,
             "note": self.note,
-            "createdAt": self.created_at.isoformat(),
-            "roomNumber": self.booking.roomNumber
+            # "createdAt": self.created_at.isoformat(),
+            # "roomNumber": self.booking.roomNumber
         }

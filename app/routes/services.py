@@ -36,11 +36,18 @@ def getServiceOrdersByDate():
 def createServiceOrder():
     reqData = request.json
     roomNo = reqData['roomNumber']
-    booking:Booking = Booking.query.filter_by(roomNumber=roomNo, status=2).first()
-    serviceOrder = ServiceOrders(
-        booking_id=booking.id, service_id=reqData['serviceId'], note=reqData['note'], status=1)
-    db.session.add_all(serviceOrder)
+    booking: Booking = Booking.query.filter_by(
+        roomNumber=roomNo, status=2).first()
+    sOrder = ServiceOrders(
+        booking_id=booking.id,
+        note=reqData['note'],
+        service_id=reqData['serviceId'],
+        status=1,
+    )
+
+    db.session.add(sOrder)
     db.session.commit()
+    return jsonify(sOrder.toJSON())
 
 
 @mod.route('/finish/<order_id>', methods=['PUT'])
